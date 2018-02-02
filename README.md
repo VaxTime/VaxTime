@@ -8,13 +8,14 @@ Measle vaccinations alone have saved  17.1 million lives from 2000-2014,
 according to WHO. In 2015 there were about 5,4 million people dying yearly
 because of not getting vaccinated. This means there are 81 million deaths in 15 years.
 
-Vaccination Alerts increase vaccinations by about 13% as demonstrated in various
-studies. 13% of 81 million are 10,5 million lives that could be saved in 15
+Vaccination Alerts increase vaccinations by about 13% as demonstrated in various studies. 13% of 81 million are 10,5 million lives that could be saved in 15
 years if vaccination alerts would be ubiquious.
 
-The VaxTime project is also available at [VaxTime](https://www.vaxtime.com). This website
-allows anyone to find out which vaccines are suggested by WHO in each country,
-and receive an email reminder 2 weeks before the vaccination moment.
+On [VaxTime](https://www.vaxtime.com) you can see a fully functional web version of this project. 
+
+After entering a birthdate and an email address, automatically email reminders will be sent in accordance with the offical vaccination recommendations of the WHO for the country of the website visitor.
+
+The reminder system is working for every country and is already fully translated to a multitude of languages. If there is any public entity in a devleoping country that would like to roll out the vaccination reminder emails on a national or regional level please reach out to us and we may be able to deliver a fully functional version adapted to your needs and capable of sending email reminders to millions of subscribers.
 
 From this point, anyone can run a copy of VaxTime, adding new features, other
 languages or setting it along with another website.
@@ -49,7 +50,7 @@ This project is under the [Creative Commons 4.0](https://creativecommons.org/lic
 
 ## Contributing
 
-This project is a charity website created and managed by LanguageCourse S.L. and EffectGive.
+This project is a charity website created and managed by [LanguageCourse S.L.](https://www.languagecourse.net) and [EffectGive](https://www.effectgive.de).
 
 If you want to contribute, feel free to do so by adding your changes and making a pull-request. We're happy to receive a couple more eyes and many more pairs of fingers to type on such a great project.
 
@@ -78,7 +79,7 @@ Once you download the project, it is structured in some folders:
     │   └── site ← The layout and the sections are here
     └── vendor ← 3rd party plugins used by VaxTime
 
-The majority of basic configuration happen in one single file:
+The majority of basic configuration happens in one single file:
 `config/config.php`. They are generated as globals:
 
 #### VAX_VERSION:
