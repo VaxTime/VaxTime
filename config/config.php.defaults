@@ -1,0 +1,32 @@
+<?php
+
+define('VAX_VERSION', '1_0');
+define('VAX_ROOT_PATH', realpath(__DIR__ . '/..'));
+
+define('VAX_SRC', realpath(VAX_ROOT_PATH . '/src'));
+define('VAX_CONFIG', realpath(VAX_ROOT_PATH . '/config'));
+define('VAX_TEMPLATES', realpath(VAX_ROOT_PATH . '/templates'));
+define('VAX_PUBLIC', realpath(VAX_ROOT_PATH . '/public'));
+
+define('VAX_ANALYTICS_KEY', '');
+
+define('VAX_NAME', '');
+define('VAX_HOME_URL', '');
+
+define('VAX_HASH_SALT', '');
+
+define('VAX_DB_HOST', '');
+define('VAX_DB_USER', '');
+define('VAX_DB_PASSWORD', '');
+define('VAX_DB_DBNAME', '');
+define('VAX_DB_PREFIX', '');
+
+define('VAX_EMAIL_PORT', 587);
+define('VAX_EMAIL_HOST', '');
+define('VAX_EMAIL_SMTP_AUTH', false);
+define('VAX_EMAIL_SMTP_SECURE', '');
+define('VAX_EMAIL_USER', '');
+define('VAX_EMAIL_PASSWORD', '');
+
+define('VAX_EMAIL_ACCOUNT_REMINDER', '');
+define('VAX_EMAIL_ACCOUNT_HELLO', '');

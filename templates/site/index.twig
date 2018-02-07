@@ -1,0 +1,99 @@
+{% extends "site/layout.general.twig" %}
+{% block content %}
+	<div id="content" class="main">	
+		<form method="post" action="my-schedule" name="applicationform" id="applicationform" _lpchecked="1">
+    	<div class="index-container">
+    		<p class="intro">{{tx('web_intro')}}</p>
+				<div class="form-inline form-group-sm">
+					<p><b>{{tx('web_form_title')}}</b></p>
+
+					<div class="regRow">									
+						<div class="radio-buttons">
+				    	<label class="radio-label" for="gender-male">{{tx('male')}}&nbsp;<input type="radio" id="gender-male" name="gender"  value="male"></label>															    	
+				    	<label class="radio-label female" for="gender-female">{{tx('female')}}&nbsp;<input type="radio" id="gender-female" name="gender"  value="female"></label>
+						</div>
+					</div>
+
+					<div class="regRow">	
+						<input type="hidden" name="lang" value="{{langId}}">
+						<div class="fieldHalf">
+						  <label>{{tx('date_of_birth')}}<span class="required">*</span></label>
+						  <select name="day" id="select_day" class="form-control dropdown">
+						  	<option readonly="readonly" disabled="disabled" value="day" selected="selected">{{tx('date_day')}}</option>
+						    <option value="1">1</option>
+						    <option value="2">2</option>
+						    <option value="3">3</option>
+						    <option value="4">4</option>
+						    <option value="5">5</option>
+						    <option value="6">6</option>
+						    <option value="7">7</option>
+						    <option value="8">8</option>
+						    <option value="9">9</option>
+						    <option value="10">10</option>
+						    <option value="11">11</option>
+						    <option value="12">12</option>
+						    <option value="13">13</option>
+						    <option value="14">14</option>
+						    <option value="15">15</option>
+						    <option value="16">16</option>
+						    <option value="17">17</option>
+						    <option value="18">18</option>
+						    <option value="19">19</option>
+						    <option value="20">20</option>
+						    <option value="21">21</option>
+						    <option value="22">22</option>
+						    <option value="23">23</option>
+						    <option value="24">24</option>
+						    <option value="25">25</option>
+						    <option value="26">26</option>
+						    <option value="27">27</option>
+						    <option value="28">28</option>
+						    <option value="29">29</option>
+						    <option value="30">30</option>
+						    <option value="31">31</option>
+						  </select>		
+
+						  <select name="month" id="select_month" class="form-control dropdown">
+						  	<option readonly="readonly" disabled="disabled" value="month" selected="selected">{{tx('date_month')}}</option>
+						    <option value="1">{{tx('date_month_1')}}</option>
+						    <option value="2">{{tx('date_month_2')}}</option>
+						    <option value="3">{{tx('date_month_3')}}</option>
+						    <option value="4">{{tx('date_month_4')}}</option>
+						    <option value="5">{{tx('date_month_5')}}</option>
+						    <option value="6">{{tx('date_month_6')}}</option>
+						    <option value="7">{{tx('date_month_7')}}</option>
+						    <option value="8">{{tx('date_month_8')}}</option>
+						    <option value="9">{{tx('date_month_9')}}</option>
+						    <option value="10">{{tx('date_month_10')}}</option>
+						    <option value="11">{{tx('date_month_11')}}</option>
+						    <option value="12">{{tx('date_month_12')}}</option>
+						  </select>	
+						  
+						  <select name="year" id="select_year" class="form-control dropdown">
+						  	<option readonly="readonly" disabled="disabled" value="year" selected="selected">{{tx('date_year')}}</option>
+						  	{% for year in currentYear..1930 %}
+						    	<option value="{{year}}">{{year}}</option>
+						  	{% endfor %}
+						  </select>
+						</div>
+					</div>	
+									
+					<div class="regRow">
+						<select name="country" class="form-control country">
+							<option readonly="readonly" disabled="disabled" selected="selected">{{tx('country')}}</option>
+							{% for country in countries %}
+						    	<option value="{{country.id|e}}" {% if(country.id == userCountry.id) %}selected="selected"{% endif %}>{{country.countryName | e}}</option>
+							{% endfor %}
+					  	</select>
+					</div>
+				</div>	
+
+				<div class="regRow send-button">		
+					<div class="submitbutton-1" onclick="var form = document.getElementById('applicationform');if (validate_and_change_1(form)) {this.onclick=null;form.submit();}">
+						<div class="submit-text">{{tx('get_schedule_button')}} <i class="fa fa-angle-right fa-2" aria-hidden="true"></i></div>
+					</div>
+				</div>
+			</div>
+ 		</form>
+	</div>
+{% endblock %}

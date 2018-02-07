@@ -1,0 +1,58 @@
+	<!doctype html>
+	<html style="direction:{{textDirection}}" direction="{{textDirection}}">
+	    <head>
+	        <meta charset="utf-8">
+	        <meta name="description" content="Vaccination scheduler">
+	        <meta name="viewport" content="width=device-width, initial-scale=1">
+        </head>
+  <body style="width:680px;font-size:14px;font-family:arial;max-width:680px;margin:0 auto;direction:{{textDirection}}" direction="{{textDirection}}">
+
+  <style type="text/css" media="screen">
+    table tr {
+      background: #f8f8f8;
+      border: 1px solid #ddd;
+      padding: .35em;
+    }
+    table th,
+    table td {
+      padding: .625em;
+      text-align: left;
+    }
+    table th {
+      font-size: .85em;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    } 
+  </style>
+
+  <img src="{{constant('VAX_HOME_URL')}}/public/images/logo.png" alt="logo">
+  <p>{{tx('email_reminder_child', {'<CHILD_NAME&&>': child.firstname, '<CHILD_AGE&&>': child.getAge()})}}</p>
+  <p><strong>{% if vaccination.description == '' %}{{ vaccination.name|e }}{% else %}{{ vaccination.description|e }}{% endif %}</strong>: ({{ vaccinationHumanMoment }})</p>
+  <p>{{tx('help_vax_important', {'<HELP_LINK_START&&>': linkOpen(constant('VAX_HOME_URL'), '_blank'), '<HELP_LINK_END&&>': linkClose()})|raw}}</p>
+
+  {% include 'partials/vac-schedule-table.twig' with {
+    'vaccineScheduleTitle': tx('vax_for_next_months'), 
+    'captionStyles' : 'margin: 14px 0; font-weight:bold; font-size:1.5em', 
+    'tableStyles': 'border: 1px solid #ccc;border-collapse:collapse;margin:0;padding:0; width:680px;table-layout: fixed', 
+    'tableRowStyles': 'background:#f8f8f8;border:1px solid #ddd;padding:.35em',
+    'tableCellStyles': 'padding:.625em;text-align:left',
+    'tableHeaderStyles': 'letter-spacing:.1em;text-transform:uppercase',
+    'schedules' : vaccineSchedules} %}
+<p><em>{{tx('consult_practitioners')}}</em></p>
+{% if vaccination.comments != '' %}
+<br>
+<table style="padding: 7px; width:100%; float:left">
+      <tbody>
+        <tr>
+          <td style="background-color: #ffdcdc">
+            <p><strong>{{tx('important_title')}} </strong> {{ vaccination.comments|e }}</p>{% endif %}
+          </td>
+      </tr>
+    </tbody>
+</table>
+<br>
+{% if vaccination.entireCountry == 0 %}<p>{{tx('vax_recommended_only', {'<COUNTRY_NAME&&>': country.countryName|e})}}</p>{% endif %}
+
+<p style="font-size: 11px; float:left">{{tx('share_others_signup')}} {{tx('unsub_text', {'<UNSUB_LINK_START&&>': linkOpen(unsubLink, '_blank'), '<UNSUB_LINK_END&&>': linkClose()})|raw}}</p>
+	</body>
+</html>

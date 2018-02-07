@@ -1,0 +1,7 @@
+{% extends "site/layout.general.twig" %}
+{% block title %}{{constant('VAX_NAME')}} - {{tx('thank_you')}}{% endblock %}
+{% block content %}
+	<div id="content" class="main">
+		<p>{{tx('unsub_done_text', {'<HOME_LINK_START&&>': linkOpen(constant('VAX_HOME_URL')), '<HOME_LINK_END&&>': linkClose()})|raw}}</p>
+	</div>
+{% endblock %}

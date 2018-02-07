@@ -1,0 +1,25 @@
+<!doctype html>
+<html style="direction:{{textDirection}}" direction="{{textDirection}}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="Vaccination scheduler">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{{constant('VAX_NAME')}} - {{tx('vax_schedule')}}</title>
+    </head>
+    <body style="width:680px;font-size:14px;font-family:arial;max-width:680px;margin:0 auto;direction:{{textDirection}}" direction="{{textDirection}}">
+      <img src="{{constant('VAX_HOME_URL')}}/public/images/logo.png" alt="logo"> 
+
+      <h1 style="font-size:1.5em;margin:.5em 0 .75em">{{tx('vax_schedule')}}</h1>
+      <p>{{tx('thanks_vax_country', {'<COUNTRY_NAME&&>': country.countryName|e})}}</p>
+
+        {% include 'partials/vac-schedule-table.twig' with {
+          'captionStyles' : 'margin: 14px 0; font-weight:bold; font-size:1.5em', 
+          'tableStyles': 'border: 1px solid #ccc;border-collapse:collapse;margin:0;padding:0; width:680px;table-layout: fixed', 
+          'tableRowStyles': 'background:#f8f8f8;border:1px solid #ddd;padding:.35em',
+          'tableCellStyles': 'padding:.625em;text-align:left',
+          'tableHeaderStyles': 'letter-spacing:.1em;text-transform:uppercase',
+          'schedules': vaccineSchedules} %}
+        
+        <p style="font-size: 11px;float: left">{{tx('unsub_text', {'<UNSUB_LINK_START&&>': linkOpen(unsubLink, '_blank'), '<UNSUB_LINK_END&&>': linkClose()})|raw}}</p>
+    </body>
+</html>

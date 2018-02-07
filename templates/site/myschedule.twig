@@ -1,0 +1,48 @@
+{% extends "site/layout.general.twig" %}
+{% block title %}{{constant('VAX_NAME')}} - {{tx('thank_you')}}{% endblock %}
+{% block content %}
+  <div id="content" class="main my-schedule-wrap"> 
+    <form method="post" action="subscribe" name="applicationform" id="applicationform" enctype="multipart/form-data" _lpchecked="1">
+      <div class="form-inline form-group-sm">
+          <p><b>{{tx('web_form_title')}}</b></p>
+          <input type="hidden" name="gender" value="{{ child.gender }}" />
+          <input type="hidden" name="birthday" value="{{ child.birthday }}" />
+          <input type="hidden" name="country" value="{{ child.countryId }}" />
+          <input type="hidden" name="lang" value="{{ child.langId }}" />
+
+          <p>{{tx('web_schedule_for_child', {'<MALE_OR_FEMALE&&>': tx(child.gender), '<COUNTRY_NAME&&>': country, '<DATE_OF_BIRTH&&>': schedules[0].getDateByLocale(child.birthday, child.langId)|e})|raw}}
+              <span><a href="javascript:window.history.go(-1)"><i class="fa fa-reply fa-1" aria-hidden="true"></i> {{tx('back_to_edit_button')}}</a></span>
+          </p>
+
+          <div class="regRow free-email">
+            <input class="form-control form-myschedule" type="text" id="name" name="name" placeholder="{{tx('first_name')}}*" value="" autocorrect="off" autocapitalize="none">
+            <input class="form-control form-myschedule" type="email" id="email" name="email" placeholder="{{tx('email_for_reminders')}}*" value="" autocorrect="off" autocapitalize="none">
+            <div class="form-control submitbutton-2" onclick="var form = document.getElementById('applicationform');if (validate_and_change_2(form)) {this.onclick=null;form.submit();}">
+              <div class="submit-text-myschedule">{{tx('get_reminder_button')}} <i class="fa fa-angle-right fa-2" aria-hidden="true"></i></div>
+            </div>
+          </div>     
+
+          <div class="regRow">
+              <p>{{tx('get_schedule_enter_email', {'<WHO_LINK_START&&>': linkOpen('http://www.who.int/en/', '_blank'), '<WHO_LINK_END&&>': linkClose()})|raw}}</p>
+          </div>     
+      </div>
+    </form>
+
+    <div class="thankyourow radio-label">
+      <label class="print-button"><i onClick="window.print()" class="fa fa-print" aria-hidden="true"></i>
+        <a id="print-button" onClick="window.print()" href="#">{{tx('print_page')}}</a>
+      </label>
+    </div>
+
+    <div class="table-container">                    
+      {% include 'partials/vac-schedule-table.twig' %}
+
+      <div class="thankyourow radio-label print-button">
+        <p>{{tx('schedule_based_on_who', {'<WHO_LINK_START&&>': linkOpen(whoUrl, '_blank'), '<WHO_LINK_END&&>': linkClose(), '<COUNTRY_NAME&&>': country, '<UPDATE_DATE&&>': lastUpdateDate})|raw}} {{tx('consult_practitioner_for_region')}}</p>
+        <label class="print-button"><i onClick="window.print()" class="fa fa-print" aria-hidden="true"></i>
+          <a id="print-button" onClick="window.print()" href="#">{{tx('print_page')}}</a>
+        </label>
+      </div>              
+    </div>
+  </div>
+{% endblock %}

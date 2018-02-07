@@ -1,0 +1,582 @@
+header{
+  width: 100%;
+  height: 80px;
+  margin-bottom: 14px
+}
+label {
+    font-weight: normal;
+    margin-right: 7px;
+}
+
+table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+table caption {
+  font-size: 1.5em;
+  margin: .5em 0 0em;
+}
+table tr {
+  background: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: .35em;
+}
+table th,
+table td {
+  padding: .625em;
+  text-align: left;
+}
+table th {
+  text-align: left;
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+footer{
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #efefef;
+  padding-right: 14px;
+  margin-top: 14px;
+}
+
+caption {
+    color: black;
+}
+
+input[type=checkbox], input[type=radio] {
+  float: right;
+}
+
+[direction=rtl] input[type=checkbox], [direction=rtl] input[type=radio] {
+  float: left;
+}
+
+.langListWrapper {
+  display: inline-block;
+  position: fixed;
+  right: 10px;
+  top: 10px;
+}
+
+.langListWrapper button:focus {
+  outline: 0;
+}
+
+.langListWrapper .dropdown, .langListWrapper .dropup {
+  font-size: 12px;
+  padding: 4px;
+}
+
+.small, small {
+    font-size: 66%;
+    font-color:black
+}
+
+#content.main{
+  margin: 0 auto; 
+}
+
+#content.main.my-schedule-wrap{
+  width: 62em;
+}
+
+.fieldErrMark{
+  border:1px solid red; 
+}
+.heading{
+  margin:0 0 12px 0;
+}
+.logo{
+  padding-top: 14px;
+}
+.logo-2{
+  padding-top: 14px;
+}
+.logo-wrap{
+  margin-top: 14px;
+  width:50%;
+  margin:0 auto
+}
+.unsub-wrap{
+  height: 675px;
+}
+.unsubscribed{
+  margin-left: 15%;
+}
+.intro{
+  margin-bottom: 16px;
+}
+
+.formContainer{
+  padding-top: inherit; 
+  overflow-y: auto;
+}
+.container{
+  width: 100% !important;
+}
+.regRow{
+  margin-bottom: 24px;
+}
+
+.regRow.free-email{
+  margin-bottom: 0px;
+}
+
+.submitbutton-1, .submitbutton-2, .submitbutton-3{
+  margin-top: 14px;
+  text-align: center;
+  color: #fff !important;
+  background-color: #67b101;
+  padding: 8px 10px;
+  font-weight: bold;
+  font-size: 13px;
+  border: 2px solid #fff;
+  box-shadow: 0 0 3px #aaa;
+  -webkit-box-shadow: 0 0 3px #aaa;
+  -moz-box-shadow: 0 0 3px #aaa;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  width: 25%;
+  cursor: pointer;
+}
+
+.submitbutton-2{
+  width: 50%;
+}
+
+.submit-text{
+  font-size: 1.5em;
+}
+
+.required{
+  color: red;
+  font-size: 1.2em;
+  vertical-align: top;
+  font-weight: bold
+}
+
+.radio-label{
+    float: left;
+    width: auto;
+    height: 36px;
+    margin-top: 7px;
+    background-color: #f1efec;
+    padding: 7px;
+    border-radius: 3px;
+    margin-right: 7px;
+    cursor: pointer;
+}
+
+.radio-buttons{
+  float: left;
+  width: 100%;
+  margin-bottom: 14px;
+}
+
+[direction=rtl] .radio-label, [direction=rtl] .radio-buttons {
+  float: right;
+}
+
+.radio-label{
+  cursor: pointer;
+}
+
+.add-to-calendar {
+  font-size: 0.8em;
+  white-space: nowrap;
+}
+
+.thankyourow{
+  width: 100%;
+  float: left;
+  margin-bottom: 14px;
+}
+
+.thankyourow.radio-label{
+  background-color: transparent;
+}
+
+.share-bar{
+  margin-top: 75px;
+}
+
+.share-bar-thx{
+  margin: 20px 0px;
+}
+
+.table-container, .index-container{
+  float: left;
+}
+
+.index-container{
+  margin-bottom: 150px;
+}
+
+.table-container{
+  margin-bottom: 266px;
+}
+
+.index-container{
+    height: auto;
+}
+
+.print-button{
+    float: right
+}
+
+.col-date{
+  width: 18%;
+}
+
+.col-interval{
+  width: 30%;
+}
+
+.col-calendar{
+  width: 14%;
+}
+
+.fa-print{
+  color: #337ab7;
+  cursor: pointer;
+}
+
+.hide-on-web {
+  display: none;
+}
+
+.form-group-sm .form-control {
+  height: auto;
+  margin-right: 7px;
+}
+
+.copyright-text p{
+ float: right;
+}
+
+.share-tag{
+ float: left;
+ margin-top: 4px;
+}
+
+.fa-lg {
+    color: #67b101;
+}
+
+
+#flagsContent a {
+  color: #3D3F34;
+  font-weight: normal;
+  background: none;
+  padding: 8px 8px 5px;
+  font-size: 11px;
+  border-bottom: 1px solid transparent;
+  text-align: left;
+}
+
+#flagsContent a {
+  padding: 0;
+}
+
+#flagsContent {
+  columns: 2;
+  overflow: hidden;
+  padding: 0;
+  margin-top: 0;
+}
+
+#flagsContent li {
+  list-style: none;
+  display: inline-block;
+  width: 128px;
+}
+
+.langList {
+  display: inline-block;
+}
+
+.langList span, #flagsContent span {
+  background-image: url(../images/flags_sprite.png);
+  vertical-align: middle;
+  background-repeat: no-repeat;
+  display: inline-block;
+  height: 17px;
+  width: 26px;
+}
+
+span.langMenuFlag_en { background-position: -1px -270px; }
+span.langMenuFlag_de { background-position: -1px 0; }
+span.langMenuFlag_fr { background-position: -1px -60px; }
+span.langMenuFlag_it { background-position: -1px -90px; }
+span.langMenuFlag_ja { background-position: -1px -120px; }
+span.langMenuFlag_es { background-position: -1px -31px; }
+span.langMenuFlag_nl { background-position: -1px -150px;; }
+span.langMenuFlag_sv { background-position: -1px -240px; }
+span.langMenuFlag_ru { background-position: -1px -210px; }
+span.langMenuFlag_fi { background-position: -1px -330px; }
+span.langMenuFlag_pt { background-position: -1px -449px; }
+span.langMenuFlag_hu { background-position: -1px -389px; }
+span.langMenuFlag_cs { background-position: -1px -300px; }
+span.langMenuFlag_no { background-position: -1px -688px; }
+span.langMenuFlag_tr { background-position: -1px -808px; }
+span.langMenuFlag_da { background-position: -1px -568px; }
+span.langMenuFlag_el { background-position: -1px -360px; }
+span.langMenuFlag_ar { background-position: -1px -868px; }
+span.langMenuFlag_ko { background-position: -1px -928px; }
+span.langMenuFlag_he { background-position: -1px -838px; }
+span.langMenuFlag_zh { background-position: -1px -538px; }
+span.langMenuFlag_ca { background-position: -1px -628px; }
+span.langMenuFlag_fa { background-position: -1px -898px; }
+span.langMenuFlag_uk { background-position: -1px -778px; }
+span.langMenuFlag_th { background-position: -1px -1048px; }
+span.langMenuFlag_hr { background-position: -1px -508px; }
+span.langMenuFlag_sl { background-position: -1px -718px; }
+span.langMenuFlag_sk { background-position: -1px -419px; }
+span.langMenuFlag_hi, 
+span.langMenuFlag_te, 
+span.langMenuFlag_mr, 
+span.langMenuFlag_ta, 
+span.langMenuFlag_ur,
+span.langMenuFlag_kn, 
+span.langMenuFlag_gu, 
+span.langMenuFlag_or, 
+span.langMenuFlag_ml { background-position: -1px -958px; }
+span.langMenuFlag_ro { background-position: -1px -598px; }
+span.langMenuFlag_sr { background-position: -1px -973px; }
+span.langMenuFlag_pl { background-position: -1px -180px; }
+span.langMenuFlag_bg { background-position: -1px -479px; }
+span.langMenuFlag_ms { background-position: -1px -658px; }
+span.langMenuFlag_bn { background-position: -1px -988px; }
+span.langMenuFlag_vi { background-position: -1px -748px; }
+
+/* Language list end*/
+
+
+[direction=rtl] .fa-angle-right:before {
+  content: "\f104";
+}
+
+[direction=rtl] .pull-right {
+  float: left!important;
+}
+
+[direction=rtl] .pull-left {
+  float: right!important;
+}
+
+@media (min-width: 320px){
+  .submit-text-myschedule {
+      font-size: 1.8em;
+      line-height: 1.2em;
+  }
+
+  .form-group-sm select.form-control {
+      height: 40px;
+      line-height: 30px;
+  }
+  .form-group-sm .form-control {
+      margin-right: 7px;
+      margin-bottom: 14px;
+  }
+  .regRow {
+      margin-bottom: 20px;
+  }
+  .logo {
+      margin-left: 0%;
+  }
+  .submitbutton-1, .submitbutton-2, .submitbutton-3{
+    width: 100%
+  }
+  #content.main, #content.main.my-schedule-wrap, .logo-wrap {
+      margin: 0 auto;
+      width: 90%;
+  }
+  .form-inline .form-control.dropdown, .form-inline .form-control.zipnumber {
+      width: 100%;
+      margin-right: 4px;
+      margin-bottom: 14px;
+  }
+   .form-inline .form-control.zipnumber {
+    margin-bottom: 0px;
+   }
+}
+@media (min-width: 600px){
+  .add-to-calendar {
+      font-size: normal;
+      margin-right: 0px;
+  }
+  .regRow {
+      margin-bottom: 10px;
+  }
+  #content.main, #content.main.my-schedule-wrap, .logo-wrap {
+      width: 75%;
+  }
+}
+
+@media (min-width: 768px){
+    .form-inline .form-control {
+        width: 50%;
+    }
+
+    .form-inline .form-control.dropdown {
+        width: 15%;
+        margin-bottom: 0px;
+    }
+    .form-inline .form-control.zipnumber {
+        width: 25%;
+        margin-bottom: 0px;
+    }
+}
+
+@media (min-width: 800px){ 
+
+  table.page-table {
+      border: 1px solid #ccc;
+      border-collapse: collapse;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      margin-top: 40px;
+  }
+  table.page-table .col-width-1 {
+      width: 150px;
+  }
+  table.page-table thead tr th {
+      text-align: center;
+  }
+  table.page-table th {
+      font-size: .85em;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+  }
+  table.page-table th, table td {
+      padding: .625em;
+      text-align: left;
+  }
+
+  .submit-text-myschedule {
+      font-size: 1.2em;
+      line-height: 1.2;
+  }
+
+  .form-group-sm select.form-control {
+      height: 30px;
+      line-height: 30px;
+  }
+
+  .form-group-sm .form-control {
+      margin-bottom: 14px;
+  }
+
+  .submitbutton-1{
+    width: 40%;
+  }
+
+  .submitbutton-2{
+    width: 36%;
+  }
+
+  .submitbutton-3{
+    width: 62%;
+  }
+}
+
+@media (min-width: 1200px){
+  #content.main,  #content.main.my-schedule-wrap, .logo-wrap {
+      width: 54em;
+  }
+  .form-inline .form-control {
+   width: 34%;
+  }
+  .form-inline .form-control.form-myschedule {
+      width: 28%;
+  }
+  .submitbutton-2{
+    margin-top: 0px;
+  }
+}
+
+@media (max-width: 360px) {
+  .logo-wrap {
+    margin: 20px auto 0 auto;
+  }
+}
+
+@media (max-width: 600px){
+
+  p {
+    font-size: 1.2em;
+  }
+
+  table {
+    border: 0;
+  }
+
+  table caption {
+    font-size: 1.3em;
+    margin: 0px; 
+  }
+
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+    padding: 1.625em;
+  }
+  table td:before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  table td:last-child {
+    border-bottom: 0;
+  }
+.fa-lg {
+    font-size: 2.2em;
+    margin-left: 6px;
+}
+  .add-to-calendar {
+      font-size: 1.4em;
+      margin-right: 4px;
+  }
+
+  .hide-mobile {
+    display: none;
+  }
+
+  .text-tutoring {
+    margin-top: 7px;
+    padding-left: 0px;
+  }
+
+  .regRowRate{
+    width: 100%;
+    }
+
+} 
+

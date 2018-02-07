@@ -1,0 +1,26 @@
+a, a:visited {
+  color: #000;
+  text-decoration: none;
+}
+
+a[href^="http"]:after {
+  content: " (" attr(href) ")";
+  word-wrap: break-word;
+}
+
+header a[href^="http"]:after {
+  content: "";
+  word-wrap: break-word;
+}
+
+.hide-on-print, .main > p, p.intro, 
+.submitbutton-2, .print-button, 
+.share-bar-thx, .calendar, .col-calendar, 
+.intro, .form-group-sm, footer, .regRow, 
+.print-button, .fa-lg {
+  display: none !important;
+}
+
+.print.hide-on-web {
+  display: block !important;
+}

@@ -1,0 +1,21 @@
+{% extends "site/layout.general.twig" %}
+{% block title %}{{constant('VAX_NAME')}} - {{tx('thank_you')}}{% endblock %}
+{% block content %}
+	<div id="content" class="main">
+		<p>{{tx('thanks_child_name', {'<CHILD_NAME&&>': child.firstname})}}</p> 
+		<p>{{tx('thanks_spam')}}</p>
+		<p class="print hide-on-web">{{tx('thanks_vax_country', {'<COUNTRY_NAME&&>': country})}}</p>
+
+		<div class="submitbutton-3" onclick="location.href='/';">
+			<div class="submit-text">{{tx('thanks_add_other_button')}} <i class="fa fa-angle-right fa-2" aria-hidden="true"></i></div>
+		</div>
+
+		<div class="share-bar-thx">
+			<p>{{tx('share_others_signup')}}</p>
+		</div>
+
+		<div class="table-container">					
+			{% include 'partials/vac-schedule-table.twig' with {'tableClasses': 'print hide-on-web'} %}			
+		</div>
+	</div>
+{% endblock %}

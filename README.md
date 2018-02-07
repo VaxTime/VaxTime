@@ -21,7 +21,6 @@ From this point, anyone can run a copy of VaxTime, adding new features, other
 languages or setting it along with another website.
 
 ## Table of Contents
-* [Table of Contents](#table-of-contents)
 * [License](#license)
 * [Contributing](#contributing)
 * [Configuration](#configuration)
@@ -45,7 +44,7 @@ languages or setting it along with another website.
 
 ## License
 
-This project is under the [Creative Commons 4.0](https://creativecommons.org/licenses/by/4.0/) license
+This project is under the [Creative Commons 4.0](https://creativecommons.org/licenses/by/4.0/) license.
 
 
 ## Contributing
