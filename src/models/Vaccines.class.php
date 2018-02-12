@@ -55,7 +55,7 @@ class Vaccines {
 
     public static function getByCountryId($db, $countryId) {
         $vaccines = [];
-        $rawVaccines = $db->fetchAll("SELECT MIN(vs.id) AS vaccine_schedule_id, MIN(vs.vac_interval) AS vac_interval, vs.rounds, MIN(vs.seconds) AS seconds, a.antigen, a.id as antigen_id, a.description, a.description_tx_code, cv.* FROM " . VAX_DB_PREFIX . "country_vaccines cv LEFT JOIN " . VAX_DB_PREFIX . "vaccine_schedules vs ON (vs.cv_id = cv.id) LEFT JOIN " . VAX_DB_PREFIX . "antigens a ON (a.id = cv.antigen_id) WHERE cv.country_id = ? AND vs.id IS NOT NULL GROUP BY a.id, cv.country_id, vs.rounds ORDER BY seconds ASC, vs.id ASC", [$countryId]);
+        $rawVaccines = $db->fetchAll("SELECT MIN(vs.id) AS vaccine_schedule_id, MIN(vs.vac_interval) AS vac_interval, vs.rounds, MIN(vs.seconds) AS seconds, a.antigen, a.id as antigen_id, a.description, a.description_tx_code, cv.* FROM " . VAX_DB_PREFIX . "country_vaccines cv LEFT JOIN " . VAX_DB_PREFIX . "vaccine_schedules vs ON (vs.cv_id = cv.id) LEFT JOIN " . VAX_DB_PREFIX . "antigens a ON (a.id = cv.antigen_id) WHERE cv.visible = 1 AND cv.country_id = ? AND vs.id IS NOT NULL GROUP BY a.id, cv.country_id, vs.rounds ORDER BY seconds ASC, vs.id ASC", [$countryId]);
 
         foreach ($rawVaccines as $vac) {
             $vac['diseases'] = implode(', ', self::getVaccineDiseasesByCountry($db, $vac['antigen_id'], $countryId));
@@ -66,7 +66,7 @@ class Vaccines {
 
     public static function getSpecialSchedulesByChild($db, Child $child) {
         $specialVaccines = [];
-        $rawVaccines = $db->fetchAll("SELECT MIN(vs.id) AS vaccine_schedule_id, MIN(vs.vac_interval) AS vac_interval, vs.rounds, MIN(vs.seconds) AS seconds, a.antigen, a.id as antigen_id, a.description, a.description_tx_code, cv.* FROM " . VAX_DB_PREFIX . "country_vaccines cv LEFT JOIN " . VAX_DB_PREFIX . "special_schedules vs ON (vs.cv_id = cv.id) LEFT JOIN " . VAX_DB_PREFIX . "antigens a ON (a.id = cv.antigen_id) WHERE cv.country_id = ? AND vs.id IS NOT NULL GROUP BY a.id, cv.country_id, vs.rounds ORDER BY seconds ASC, vs.rounds ASC, vs.id ASC", [$child->countryId]);
+        $rawVaccines = $db->fetchAll("SELECT MIN(vs.id) AS vaccine_schedule_id, MIN(vs.vac_interval) AS vac_interval, vs.rounds, MIN(vs.seconds) AS seconds, a.antigen, a.id as antigen_id, a.description, a.description_tx_code, cv.* FROM " . VAX_DB_PREFIX . "country_vaccines cv LEFT JOIN " . VAX_DB_PREFIX . "special_schedules vs ON (vs.cv_id = cv.id) LEFT JOIN " . VAX_DB_PREFIX . "antigens a ON (a.id = cv.antigen_id) WHERE cv.visible = 1 AND cv.country_id = ? AND vs.id IS NOT NULL GROUP BY a.id, cv.country_id, vs.rounds ORDER BY seconds ASC, vs.rounds ASC, vs.id ASC", [$child->countryId]);
 
         foreach ($rawVaccines as $special) {
             if ($child->gender == $special['targets'] || $special['targets'] == 'all') {
@@ -98,7 +98,7 @@ public static function getByChild($db, Child $child) {
 }
 
 public static function getVaccineDiseasesByCountry($db, $antigenId, $countryId) {
-    $diseases = $db->fetchAll("SELECT DISTINCT(disease), disease_tx_code FROM " . VAX_DB_PREFIX . "country_vaccines WHERE antigen_id = ? and country_id = ?", [$antigenId, $countryId]);
+    $diseases = $db->fetchAll("SELECT DISTINCT(disease), disease_tx_code FROM " . VAX_DB_PREFIX . "country_vaccines WHERE visible = 1 AND antigen_id = ? and country_id = ?", [$antigenId, $countryId]);
 
     return array_map(function($a) use ($diseases) {
         try {
@@ -211,7 +211,7 @@ public function shouldOfferCalendarLinks($birthday) {
 }
 
 public static function getByScheduledId($db, $vaccineScheduleId) {
-    $rawVaccine = $db->fetchAssoc("SELECT MIN(vs.id) AS vaccine_schedule_id, MIN(vs.vac_interval) AS vac_interval, vs.rounds, MIN(vs.seconds) AS seconds, a.antigen, a.id as antigen_id, a.description, a.description_tx_code, cv.* FROM " . VAX_DB_PREFIX . "country_vaccines cv LEFT JOIN " . VAX_DB_PREFIX . "vaccine_schedules vs ON (vs.cv_id = cv.id) LEFT JOIN " . VAX_DB_PREFIX . "antigens a ON (a.id = cv.antigen_id) WHERE vs.id = ? AND vs.id IS NOT NULL GROUP BY a.id, cv.country_id, vs.rounds ORDER BY seconds ASC, vs.id ASC", [$vaccineScheduleId]);
+    $rawVaccine = $db->fetchAssoc("SELECT MIN(vs.id) AS vaccine_schedule_id, MIN(vs.vac_interval) AS vac_interval, vs.rounds, MIN(vs.seconds) AS seconds, a.antigen, a.id as antigen_id, a.description, a.description_tx_code, cv.* FROM " . VAX_DB_PREFIX . "country_vaccines cv LEFT JOIN " . VAX_DB_PREFIX . "vaccine_schedules vs ON (vs.cv_id = cv.id) LEFT JOIN " . VAX_DB_PREFIX . "antigens a ON (a.id = cv.antigen_id) WHERE cv.visible = 1 AND vs.id = ? AND vs.id IS NOT NULL GROUP BY a.id, cv.country_id, vs.rounds ORDER BY seconds ASC, vs.id ASC", [$vaccineScheduleId]);
     $rawVaccine['diseases'] = implode(', ', self::getVaccineDiseasesByCountry($db, $rawVaccine['antigen_id'], $rawVaccine['country_id']));
     $vaccine = [];
     $vaccine = new Vaccines($rawVaccine);
