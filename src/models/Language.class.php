@@ -39,7 +39,7 @@ class Language {
             self::getAll($db);
         }
 
-        $languages = explode(',',$_SERVER['HTTP_ACCEPT_LANGUAGE']);
+        $languages = explode(',', empty($_SERVER['HTTP_ACCEPT_LANGUAGE'])? 'en' : $_SERVER['HTTP_ACCEPT_LANGUAGE']);
         $cleanedLangs = [];
 
         foreach($languages as $lang)
