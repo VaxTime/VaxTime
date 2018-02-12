@@ -1,25 +1,26 @@
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a1ff0b32b9d473b"></script>
 <script type="text/javascript">
-$(function() {
-  var addthis_share = {
-    url: "{{constant('VAX_HOME_URL')}}",
-    title: "{{tx('web_meta_title')}}",
-    description: "{{tx('web_meta_description')}}",
-    media: "{{constant('VAX_HOME_URL')}}/public/images/logo.png"
-  }
+    $(function () {
+        var addthis_share = {
+            url: "{{ constant('VAX_HOME_URL') }}",
+            title: "{{ tx('web_meta_title') }}",
+            description: "{{ tx('web_meta_description') }}",
+            media: "{{ constant('VAX_HOME_URL') }}/public/images/logo.png"
+        }
 
-  function addthisReady() {
-    var addthisIcons = document.getElementsByClassName('at-icon-wrapper');
-    if (addthisIcons.length>0) {
-      for (var i = addthisIcons.length - 1; i >= 0; i--) {
-        addthisIcons[i].style = 'background-color:transparent';
-      }
-    } else {
-      setTimeout(addthisReady, 5);
-    }
-    jQuery('.addthis_inline_share_toolbox_qdhl').css("clear","none"); 
-  }
-  addthisReady();
-})
+        function addthisReady() {
+            var addthisIcons = document.getElementsByClassName('at-icon-wrapper');
+            if (addthisIcons.length > 0) {
+                for (var i = addthisIcons.length - 1; i >= 0; i--) {
+                    addthisIcons[i].style = 'background-color:transparent';
+                }
+            } else {
+                setTimeout(addthisReady, 5);
+            }
+            jQuery('.addthis_inline_share_toolbox_qdhl').css("clear", "none");
+        }
+
+        addthisReady();
+    })
 </script>
 <div class="addthis_inline_share_toolbox_qdhl"></div>

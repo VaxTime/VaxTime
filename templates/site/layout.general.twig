@@ -1,41 +1,45 @@
 <!doctype html>
-<html style="direction:{{textDirection}}" direction="{{textDirection}}">
-  <head>
-      {% include 'partials/metadata.twig' %}
-      <title>{% block title %}{{constant('VAX_NAME')}}{% endblock %}</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-      <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-      <link rel="stylesheet" href="https://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css"> 
-      <link rel="stylesheet" href="/public/css/style.css">
-      <link rel="stylesheet" href="/public/css/print.css" type="text/css" media="print">
-      <link rel="icon" type="image/png" href="/public/images/favicon.ico">
-      <link rel="stylesheet" href="https://d1azc1qln24ryf.cloudfront.net/114779/Socicon/style-cf.css?u8vidh">
-      <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-      {% include 'partials/google-analytics.twig' %}
-  </head>
+<html style="direction:{{ textDirection }}" direction="{{ textDirection }}">
+<head>
+    {% include 'partials/metadata.twig' %}
+    <title>{% block title %}{{ constant('VAX_NAME') }}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="/public/css/print.css" type="text/css" media="print">
+    <link rel="icon" type="image/png" href="/public/images/favicon.ico">
+    <link rel="stylesheet" href="https://d1azc1qln24ryf.cloudfront.net/114779/Socicon/style-cf.css?u8vidh">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    {% include 'partials/google-analytics.twig' %}
+</head>
 
-  <body class="formContainer" style="direction:{{textDirection}}" direction="{{textDirection}}">
-  <header>
+<body class="formContainer" style="direction:{{ textDirection }}" direction="{{ textDirection }}">
+<header>
     <div class="langListWrapper hide-on-print">
-      <button type="button" class="langList btn btn-link" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" data-content="<ul id='flagsContent'>
-          {% for language in languages %}
-            <li id='flag_link_to_{{language.shortCode}}'><a href='/{{language.shortCode}}{{baseRoute}}' alt='{{language.name}}' title='{{language.name}}'><span id ='langMenuFlag_{{language.shortCode}}' class='langMenuFlag_{{language.shortCode}} langFlag'></span> {{language.name}}</a></li>
-          {% endfor %}
-        </ul>">
-        <span class="langMenuFlag_{{userLanguage}} langFlag"></span>
-      </button>
+        <button type="button" class="langList btn btn-link" data-container="body" data-toggle="popover"
+                data-placement="bottom" data-html="true" data-content="<ul id='flagsContent'>
+{% for language in languages %}
+<li id='flag_link_to_{{ language.shortCode }}'><a href='/{{ language.shortCode }}{{ baseRoute }}' alt='{{ language.name }}' title='{{ language.name }}'><span id ='langMenuFlag_{{ language.shortCode }}' class='langMenuFlag_{{ language.shortCode }} langFlag'></span> {{ language.name }}</a></li>
+{% endfor %}
+</ul>">
+            <span class="langMenuFlag_{{ userLanguage }} langFlag"></span>
+        </button>
     </div>
-    <div class="logo-wrap"><img class="logo" src="/public/images/logo.png" alt="{{tx('logo_vaxtime')}}" title="{{tx('logo_vaxtime')}}"></div>
-  </header>
-    {% block content %}
-    {% endblock %}
+    <div class="logo-wrap"><img class="logo" src="/public/images/logo.png" alt="{{ tx('logo_vaxtime') }}"
+                                title="{{ tx('logo_vaxtime') }}"></div>
+</header>
+{% block content %}
+{% endblock %}
 
-    {% include 'partials/footer.twig' %}
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/public/js/form_errors_tx.php?lang_code={{userLanguage}}"></script>
-    <script type="text/javascript" src="/public/js/form.js"></script>
-    <script type="text/javascript" src="/public/js/languages.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/js/bootstrap-datepicker.js"></script>
-  </body>
+{% include 'partials/footer.twig' %}
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/public/js/form_errors_tx.php?lang_code={{ userLanguage }}"></script>
+<script type="text/javascript" src="/public/js/form.js"></script>
+<script type="text/javascript" src="/public/js/languages.js"></script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/js/bootstrap-datepicker.js"></script>
+</body>
 </html>

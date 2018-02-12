@@ -1,103 +1,122 @@
 {% set futureVaccines = false %}
 {% set pastVaccines = false %}
 
-{% for vac in schedules %}  
-  {% if vac.shouldOfferCalendarLinks(child.birthday) %}
-    {% set futureVaccines = true %}
-  {% else %}
-    {% set pastVaccines = true %}
-  {% endif %}
+{% for vac in schedules %}
+    {% if vac.shouldOfferCalendarLinks(child.birthday) %}
+        {% set futureVaccines = true %}
+    {% else %}
+        {% set pastVaccines = true %}
+    {% endif %}
 {% endfor %}
 
 {% if futureVaccines %}
-  <table class="{{tableClasses|default("")}}" style="{{tableStyles|default("")}}">
-    <caption style="{{captionStyles|default("")}}">{{vaccineScheduleTitle|default(tx('vax_schedule'))}}</caption>
-    <thead>
-      <tr style="{{tableRowStyles|default("")}}">
-        <th style="{{tableHeaderStyles|default("")}}" scope="col">{{tx('vax_name')}}</th>
-        <th style="{{tableHeaderStyles|default("")}}" scope="col" class="col-date">{{tx('date')}}</th>
-        <th style="{{tableHeaderStyles|default("")}}" scope="col" class="col-calendar">{{tx('add_to_calendar')}}</th>
-      </tr>
-    </thead>
-    <tbody>
-    {% for vac in schedules %}
-      {% if vac.shouldOfferCalendarLinks(child.birthday) %}
-        <tr style="{{tableRowStyles|default("")}}">
-          <td style="{{tableCellStyles|default("")}}" data-label="{{tx('vax_name')}}">
-            {% if vac.description == '' %}{{ vac.name|e }}{% else %}{{ vac.description|e }}{% endif %}
-            {% if vac.comments != '' %}
-              <span class="glyphicon glyphicon-info-sign fa-lg pull-right" aria-hidden="true" data-toggle="tooltip" data-placement="left" title="{{ vac.comments|capitalize }}"></span>
-            {% endif %}
-            {% if vac.entireCountry == 0 %}<strong>{{tx('risk_only')}}</strong>{% endif %}
-          </td>
-          <td style="{{tableCellStyles|default("")}}" data-label="{{tx('date')}}">{{ vac.getDateByLocale(vac.getVaccineDate(child.birthday), userLanguage)|e }}</td>
-          <td style="{{tableCellStyles|default("")}}" class="{% if not vac.shouldOfferCalendarLinks(child.birthday) %}hide-mobile{% endif %} calendar" data-label="{{tx('add_to_calendar')}}">
-            <a class="add-to-calendar" target="_blank" href="{{ vac.getGoogleCalendarLink(child.birthday)|e }}">
-              <i class="socicon-googlecalendar"></i> <span>{{tx('google_brand')}}</span>
-            </a> 
-            <a class="add-to-calendar" target="_blank" href="{{ vac.getOutlookCalendarLink(child.birthday)|e }}">
-              <i class="socicon-outlook"></i> <span>{{tx('outlook_brand')}}</span>
-            </a>
-          </td>
+    <table class="{{ tableClasses|default("") }}" style="{{ tableStyles|default("") }}">
+        <caption
+                style="{{ captionStyles|default("") }}">{{ vaccineScheduleTitle|default(tx('vax_schedule')) }}</caption>
+        <thead>
+        <tr style="{{ tableRowStyles|default("") }}">
+            <th style="{{ tableHeaderStyles|default("") }}" scope="col">{{ tx('vax_name') }}</th>
+            <th style="{{ tableHeaderStyles|default("") }}" scope="col" class="col-date">{{ tx('date') }}</th>
+            <th style="{{ tableHeaderStyles|default("") }}" scope="col"
+                class="col-calendar">{{ tx('add_to_calendar') }}</th>
         </tr>
-      {% endif %}
-    </tbody>
-    {% endfor %}    
-  </table>
+        </thead>
+        <tbody>
+        {% for vac in schedules %}
+        {% if vac.shouldOfferCalendarLinks(child.birthday) %}
+            <tr style="{{ tableRowStyles|default("") }}">
+                <td style="{{ tableCellStyles|default("") }}" data-label="{{ tx('vax_name') }}">
+                    {% if vac.description == '' %}{{ vac.name|e }}{% else %}{{ vac.description|e }}{% endif %}
+                    {% if vac.comments != '' %}
+                        <span class="glyphicon glyphicon-info-sign fa-lg pull-right" aria-hidden="true"
+                              data-toggle="tooltip" data-placement="left" title="{{ vac.comments|capitalize }}"></span>
+                    {% endif %}
+                    {% if vac.entireCountry == 0 %}<strong>{{ tx('risk_only') }}</strong>{% endif %}
+                </td>
+                <td style="{{ tableCellStyles|default("") }}"
+                    data-label="{{ tx('date') }}">{{ vac.getDateByLocale(vac.getVaccineDate(child.birthday), userLanguage)|e }}</td>
+                <td style="{{ tableCellStyles|default("") }}"
+                    class="{% if not vac.shouldOfferCalendarLinks(child.birthday) %}hide-mobile{% endif %} calendar"
+                    data-label="{{ tx('add_to_calendar') }}">
+                    <a class="add-to-calendar" target="_blank" href="{{ vac.getGoogleCalendarLink(child.birthday)|e }}">
+                        <i class="socicon-googlecalendar"></i> <span>{{ tx('google_brand') }}</span>
+                    </a>
+                    <a class="add-to-calendar" target="_blank"
+                       href="{{ vac.getOutlookCalendarLink(child.birthday)|e }}">
+                        <i class="socicon-outlook"></i> <span>{{ tx('outlook_brand') }}</span>
+                    </a>
+                </td>
+            </tr>
+        {% endif %}
+        </tbody>
+        {% endfor %}
+    </table>
 {% endif %}
 
 {% if pastVaccines %}
-  <table class="{{tableClasses|default("")}}" style="{{tableStyles|default("")}}">
-    <caption style="{{captionStyles|default("")}}">{{tx('due_vax')}}<br><small>{{tx('due_vax_recommendation')}}</small><br /></caption>
+    <table class="{{ tableClasses|default("") }}" style="{{ tableStyles|default("") }}">
+        <caption style="{{ captionStyles|default("") }}">{{ tx('due_vax') }}<br>
+            <small>{{ tx('due_vax_recommendation') }}</small>
+            <br/></caption>
 
-    <thead>
-      <tr style="{{tableRowStyles|default("")}}">
-        <th style="{{tableHeaderStyles|default("")}}" scope="col">{{tx('vax_name')}}</th>
-        <th style="{{tableHeaderStyles|default("")}}" scope="col" class="col-date">{{tx('date')}}</th>
-      </tr>
-    </thead>
-    <tbody>
-    {% for vac in schedules %}
-      {% if not vac.shouldOfferCalendarLinks(child.birthday) %}
-        <tr style="{{tableRowStyles|default("")}}">
-          <td style="{{tableCellStyles|default("")}}" data-label="{{tx('vax_name')}}">
-            {% if vac.description == '' %}{{ vac.name|e }}{% else %}{{ vac.description|e }}{% endif %}
-            {% if vac.comments != '' %}
-              <span class="glyphicon glyphicon-info-sign fa-lg pull-right" aria-hidden="true" data-toggle="tooltip" data-placement="left" title="{{ vac.comments|capitalize }}"></span>
-            {% endif %}
-            {% if vac.entireCountry == 0 %}<strong>{{tx('risk_only')}}</strong>{% endif %}
-          </td>
-          <td style="{{tableCellStyles|default("")}}" data-label="{{tx('date')}}">{{ vac.getDateByLocale(vac.getVaccineDate(child.birthday), userLanguage)|e }}</td>
+        <thead>
+        <tr style="{{ tableRowStyles|default("") }}">
+            <th style="{{ tableHeaderStyles|default("") }}" scope="col">{{ tx('vax_name') }}</th>
+            <th style="{{ tableHeaderStyles|default("") }}" scope="col" class="col-date">{{ tx('date') }}</th>
         </tr>
-      {% endif %}
-    {% endfor %}    
-    </tbody>
-  </table>
+        </thead>
+        <tbody>
+        {% for vac in schedules %}
+            {% if not vac.shouldOfferCalendarLinks(child.birthday) %}
+                <tr style="{{ tableRowStyles|default("") }}">
+                    <td style="{{ tableCellStyles|default("") }}" data-label="{{ tx('vax_name') }}">
+                        {% if vac.description == '' %}{{ vac.name|e }}{% else %}{{ vac.description|e }}{% endif %}
+                        {% if vac.comments != '' %}
+                            <span class="glyphicon glyphicon-info-sign fa-lg pull-right" aria-hidden="true"
+                                  data-toggle="tooltip" data-placement="left"
+                                  title="{{ vac.comments|capitalize }}"></span>
+                        {% endif %}
+                        {% if vac.entireCountry == 0 %}<strong>{{ tx('risk_only') }}</strong>{% endif %}
+                    </td>
+                    <td style="{{ tableCellStyles|default("") }}"
+                        data-label="{{ tx('date') }}">{{ vac.getDateByLocale(vac.getVaccineDate(child.birthday), userLanguage)|e }}</td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+        </tbody>
+    </table>
 {% endif %}
 
 {% if specialSchedules is defined and specialSchedules != false %}
-  <table class="{{tableClasses|default("")}}" style="{{tableStyles|default("")}}">
-    <caption style="{{captionStyles|default("")}}">{{tx('specific_case_country', {'<COUNTRY_NAME&&>': country})}}<br /></caption>
+    <table class="{{ tableClasses|default("") }}" style="{{ tableStyles|default("") }}">
+        <caption
+                style="{{ captionStyles|default("") }}">{{ tx('specific_case_country', {'<COUNTRY_NAME&&>': country}) }}
+            <br/></caption>
 
-    <thead>
-      <tr style="{{tableRowStyles|default("")}}">
-        <th style="{{tableHeaderStyles|default("")}}" scope="col">{{tx('vax_name')}}</th>
-        <th style="{{tableHeaderStyles|default("")}}" scope="col" class="col-interval">{{tx('time_interval')}}</th>
-      </tr>
-    </thead>
-    <tbody>
-    {% for vac in specialSchedules %}
-        <tr style="{{tableRowStyles|default("")}}">
-          <td style="{{tableCellStyles|default("")}}" data-label="{{tx('vax_name')}}">
-            {% if vac.description == '' %}{{ vac.name|e }}{% else %}{{ vac.description|e }}{% endif %}
-            {% if vac.comments != '' %}
-              <span class="glyphicon glyphicon-info-sign fa-lg pull-right" aria-hidden="true" data-toggle="tooltip" data-placement="left" title="{{ vac.comments|capitalize }}"></span>
-            {% endif %}              
-            {% if vac.entireCountry == 0 %}<strong>{{tx('risk_only')}}</strong>{% endif %}
-          </td>
-          <td style="{{tableCellStyles|default("")}}" data-label="{{tx('time_interval')}}">{{ vac.getFormattedInterval()|e }} ({{tx('shot_number', {'<SHOT_NUMBER&&>': vac.rounds})}})</td>
+        <thead>
+        <tr style="{{ tableRowStyles|default("") }}">
+            <th style="{{ tableHeaderStyles|default("") }}" scope="col">{{ tx('vax_name') }}</th>
+            <th style="{{ tableHeaderStyles|default("") }}" scope="col"
+                class="col-interval">{{ tx('time_interval') }}</th>
         </tr>
-    {% endfor %}    
-    </tbody>
-  </table>
+        </thead>
+        <tbody>
+        {% for vac in specialSchedules %}
+            <tr style="{{ tableRowStyles|default("") }}">
+                <td style="{{ tableCellStyles|default("") }}" data-label="{{ tx('vax_name') }}">
+                    {% if vac.description == '' %}{{ vac.name|e }}{% else %}{{ vac.description|e }}{% endif %}
+                    {% if vac.comments != '' %}
+                        <span class="glyphicon glyphicon-info-sign fa-lg pull-right" aria-hidden="true"
+                              data-toggle="tooltip" data-placement="left" title="{{ vac.comments|capitalize }}"></span>
+                    {% endif %}
+                    {% if vac.entireCountry == 0 %}<strong>{{ tx('risk_only') }}</strong>{% endif %}
+                </td>
+                <td style="{{ tableCellStyles|default("") }}"
+                    data-label="{{ tx('time_interval') }}">{{ vac.getFormattedInterval()|e }}
+                    ({{ tx('shot_number', {'<SHOT_NUMBER&&>': vac.rounds}) }})
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endif %}      
