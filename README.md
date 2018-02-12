@@ -84,6 +84,12 @@ The majority of basic configuration happens in one single file:
 #### VAX_VERSION:
 A code used to let you know which version this configuration is based on.
 
+#### VAX_DEBUG
+A flag to decide whether to show the debugging info or not. Set it to false if you go online.
+
+#### VAX_LAST_UPDATE_TIME
+This is the last date the vaccines database was updated from WHO.
+
 #### VAX_ROOT_PATH:
 The project's root path. By default, if the configuration file lives in
 `my-path/config`, then the root path is `my-path`.
@@ -157,16 +163,16 @@ VaxTime runs in multiple languages. This means the texts are translated and the 
 
 |             |              |              |             |
 |:-----------:|:------------:|:------------:|:-----------:|
-| Arabic      ️| Bengali      | Bulgarian    | Catalan    *|
-| Chinese     ️| Croatian     ️| Czech        ️| Danish      |
-| Dutch       ️| English     *| Farsi        | Finnish     ️|
-| French      ️| German       ️| Greek        | Gujarati    ️|
-| Hebrew      ️| Hindi        ️| Hungarian    ️| Italian     |
-| Japanese    | Kannada      ️| Korean       ️| Malaysian   ️|
-| Malayalam   | Marathi      ️| Norwegian    ️| Odia        |
-| Polish      | Portuguese   | Romanian     | Russian     |
-| Slovak      ️| Slovene      | Spanish     *| Swedish     ️|
-| Tamil       ️| Telugu       ️| Thai         | Turkish     ️|
+| Arabic     *️| Bengali      | Bulgarian   *| Catalan    *|
+| Chinese    *️| Croatian    *️| Czech       *️| Danish      |
+| Dutch      *| English     *| Farsi        | Finnish    *|
+| French     *️| German      *| Greek       *| Gujarati    ️|
+| Hebrew     *️| Hindi       *| Hungarian   *| Italian     |
+| Japanese    | Kannada      ️| Korean      *️| Malaysian  *️|
+| Malayalam   | Marathi      ️| Norwegian   *️| Odia        |
+| Polish      | Portuguese  *| Romanian    *| Russian     |
+| Slovak     *️| Slovene      | Spanish     *| Swedish    *|
+| Tamil       ️| Telugu       ️| Thai         | Turkish    *|
 | Ukrainian   | Urdu         ️| Vietnamese   |             |
 
 They **all** come enabled by default, but you can simply remove them from the `languages` table.
