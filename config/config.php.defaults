@@ -1,6 +1,9 @@
 <?php
 
 define('VAX_VERSION', '1_0');
+define('VAX_DEBUG', true);
+define('VAX_LAST_UPDATE_TIME', '2017-12-12');
+
 define('VAX_ROOT_PATH', realpath(__DIR__ . '/..'));
 
 define('VAX_SRC', realpath(VAX_ROOT_PATH . '/src'));

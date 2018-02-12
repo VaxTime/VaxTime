@@ -3,7 +3,7 @@ global $app;
 
 require_once __DIR__ . '/../config/config.php';
 
-$app['debug'] = true;
+$app['debug'] = VAX_DEBUG;
 
 require_once VAX_CONFIG . '/db.php';
 require_once VAX_CONFIG . '/templates.php';

@@ -15,7 +15,7 @@ class VaxTimeControllerProvider implements ControllerProviderInterface {
         $formatter = new IntlDateFormatter($this->userLanguage, IntlDateFormatter::MEDIUM, IntlDateFormatter::NONE);
 
         $app['twig']->addGlobal('userLanguage', $this->userLanguage);
-        $app['twig']->addGlobal('lastUpdateDate', $formatter->format(strtotime('2017-12-12')));
+        $app['twig']->addGlobal('lastUpdateDate', $formatter->format(strtotime(VAX_LAST_UPDATE_TIME)));
 
         Translation::init($app['db'], $this->userLanguage);
 
