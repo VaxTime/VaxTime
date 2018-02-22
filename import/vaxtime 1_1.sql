@@ -45,3 +45,50 @@ UPDATE `country_vaccines` SET `visible`='0' WHERE `id`='2773';
 UPDATE `country_vaccines` SET `visible`='0' WHERE `id`='2216';
 UPDATE `country_vaccines` SET `visible`='0' WHERE `id`='1222';
 UPDATE `country_vaccines` SET `visible`='0' WHERE `id`='1221';
+
+
+CREATE TABLE `users`
+(
+    `id` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    `contact_name` VARCHAR(50) NOT NULL,
+    `organisation_name` VARCHAR(250) NOT NULL,
+    `email` VARCHAR(250) NOT NULL,
+    `pwd` VARCHAR(255) NOT NULL,
+    `address_1` VARCHAR(255),
+    `address_2` VARCHAR(255),
+    `city` VARCHAR(255),
+    `country_id` INT,
+    `is_admin` TINYINT(1) DEFAULT 0,
+    `status` TINYINT(1) DEFAULT 1 COMMENT '1: enabled; 0: disabled;'
+);
+CREATE UNIQUE INDEX `users_email_uindex` ON `users` (`email`);
+
+ALTER TABLE `children` ADD `manual_id` VARCHAR(72) NULL;
+ALTER TABLE `children` ADD `user_id` INT NULL COMMENT 'in case a user manages this child. It can be null';
+
+CREATE TABLE import_files
+(
+    `id` INT PRIMARY KEY AUTO_INCREMENT,
+    `user_id` INT NOT NULL,
+    `response_email` VARCHAR(255) NOT NULL,
+    `default_lang` INT NOT NULL,
+    `default_country` INT NOT NULL,
+    `has_permission` TINYINT(1) DEFAULT 0 NOT NULL,
+    `file` VARCHAR(255) NOT NULL,
+    `has_header` TINYINT DEFAULT 0 NOT NULL,
+    `upload_time` DATETIME,
+    `completion_time` DATETIME,
+    `status` TINYINT DEFAULT 0 COMMENT '0: not started; 1: processing; 2: done; 3; done, no errors'
+);
+CREATE UNIQUE INDEX import_files_id_uindex ON import_files (id);
+CREATE UNIQUE INDEX import_files_file_uindex ON import_files (file);
+CREATE INDEX import_files_user_id_index ON import_files (user_id);
+
+CREATE TABLE `sessions`
+(
+    `session_id` VARCHAR(255) PRIMARY KEY,
+    `session_value` TEXT,
+    `session_lifetime` INT,
+    `session_time` INT
+);
+CREATE UNIQUE INDEX sessions_session_id_uindex ON sessions (session_id);

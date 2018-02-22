@@ -46,6 +46,15 @@ class Country {
         return new Country($db->fetchAssoc("SELECT * FROM " . VAX_DB_PREFIX . "countries WHERE id = ?", [$countryId]));
     }
 
+    public static function getByIdOrIso($db, $idOrIso) {
+        $country = $db->fetchAssoc("SELECT * FROM " . VAX_DB_PREFIX . "countries WHERE id = ? OR country_code = ?", [$idOrIso, $idOrIso]);
+        if (!empty($country)) {
+            return new Country($country);
+        } else {
+            return false;
+        }
+    }
+
     public static function getByIp($db, $ip){
         if (in_array($ip, ['::1', '127.0.0.1'])) {
             return  new Country($db->fetchAssoc("SELECT c.* FROM " . VAX_DB_PREFIX . "countries c LEFT JOIN " . VAX_DB_PREFIX . "ip2nation i2n ON (c.country_code LIKE i2n.country) WHERE c.id = 209"));

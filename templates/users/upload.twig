@@ -1,0 +1,153 @@
+{% extends "site/layout.general.twig" %}
+{% block title %}{{ constant('VAX_NAME') }} - Upload{% endblock %}
+{% block content %}
+    <div id="content" class="main">
+        <h2>Upload a list</h2>
+        <div>
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#instructions" role="tab"
+                                                          data-toggle="tab">Instructions</a></li>
+                <li role="presentation"><a href="#data" role="tab" data-toggle="tab">Data</a></li>
+                <li role="presentation"><a href="#upload" role="tab" data-toggle="tab">Upload</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active well" id="instructions">
+                    <p>You can upload a list of people using a CSV file. We will incorporate the people that can be
+                        registered, and
+                        return you a CSV file with the ones that couldn't be added.</p>
+                    <p>It needs to have these columns:</p>
+                    <ul>
+                        <li><strong>Email</strong>: The correct email address that will receive the reminders. We will
+                            not check if it exists, only if it is well formatted.
+                        </li>
+                        <li><strong>Date of birth</strong>: The person's date of birth, in format YYYY-MM-DD.</li>
+                        <li><strong>First name</strong>: The person's first name.</li>
+                        <li><strong>Country</strong>: The person's country. It must be using the country Id of our Data
+                            tab, or the 2-character iso code. Any other format won't be accepted. <em>Optional.</em>
+                        </li>
+                        <li><strong>Language</strong>: The person's language. It should be using the language Id of our
+                            Data tab, or a 2-character iso code of the ones we offer. Any other format won't be
+                            accepted. <em>Optional.</em></li>
+                        <li><strong>Unique ID</strong>: A custom field to identify the person. <em>Optional.</em></li>
+                    </ul>
+                    <p>We will process the CSV file in the background and send you a report afterwards, checking for
+                        email formats, dates and duplicates. If we find out that one row contains the same email, date
+                        of birth and name, we will mark it as duplicate. If the unique ID is not empty, we will use that
+                        one to check for uniqueness, too.</p>
+                    <p>If you don't want to fill one of the columns, you can leave it blank. If you want to fill one of
+                        the last ones (like Language or Unique ID), you still need to leave the middle columns blank.</p>
+                    <p>If you leave any country or language column empty, we will fill it with the one you choose in
+                        the dropdown. If all the people lives in the same country, or all of them will use the same
+                        language, we recommend you to leave the columns empty and select them via the dropdowns, to
+                        avoid any typo in the CSV.</p>
+                </div>
+                <div role="tabpanel" class="tab-pane well" id="data" style="max-height: 500px;overflow-y: scroll">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Countries</h4>
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>country Id</th>
+                                    <th>iso code</th>
+                                    <th>Name</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for country in countries %}
+                                    <tr>
+                                        <td>{{country.id|e}}</td>
+                                        <td>{{country.countryCode}}</td>
+                                        <td>{{country.countryName | e}}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Languages</h4>
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>language Id</th>
+                                    <th>iso code</th>
+                                    <th>Name</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for lang in languages %}
+                                    <tr>
+                                        <td>{{lang.langId|e}}</td>
+                                        <td>{{lang.shortCode | e}}</td>
+                                        <td>{{lang.name | e}}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane well" id="upload">
+                    <form action="/user/upload" method="post" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="email">Email to receive report</label>
+                                    <input type="email" value="{{ user.email }}" class="form-control" name="email" id="email"
+                                           placeholder="It will receive the report of the users. Make sure you and only you have access to it">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="default_lang">Default language</label>
+                                    <select class="form-control" name="default_lang" id="default_lang">
+                                    {% for lang in languages %}
+                                        <option value="{{lang.langId|e}}" {% if(lang.shortCode == userLanguage) %}selected="selected"{% endif %}>{{lang.name | e}}</option>
+                                    {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="default_country">Default country</label>
+                                    <select class="form-control" name="default_country" id="default_country">
+                                    {% for country in countries %}
+                                        <option value="{{country.id|e}}" {% if(country.id == userCountry.id) %}selected="selected"{% endif %}>{{country.countryName | e}}</option>
+                                    {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="exampleInputFile">CSV to import (max 4MB)</label>
+                                    <input type="file" id="file" name="file">
+
+                                    <div class="checkbox">
+                                        <label>
+                                            <input name="has_header" value="1" type="checkbox"> The file has a header (skip first row)
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input name="has_permission" value="1" type="checkbox"> I have the permission to upload these people's information
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-default">Upload</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
