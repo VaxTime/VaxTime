@@ -2,6 +2,8 @@
 
 use Silex\Api\ControllerProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Cookie;
 
 class UserControllerProvider implements ControllerProviderInterface
 {
@@ -55,28 +57,41 @@ class UserControllerProvider implements ControllerProviderInterface
         });
 
         $controller->get('/logout', function () use ($app) {
-            $app = $this->initWithLang($app);
-
+            $app['session']->remove('user');
+            return $app->redirect('/user/login');
         });
 
-        $controller->get('/upload', function () use ($app) {
+        $controller->get('/upload', function (Request $request) use ($app) {
             $app = $this->initWithLang($app);
 
             if (!$this->isLoggedIn($app)) {
                 return $app->redirect('/user/login');
             }
 
-            if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-                $IParray=array_values(array_filter(explode(',',$_SERVER['HTTP_X_FORWARDED_FOR'])));
-                $ip = $IParray[0];
+            if(!$app['session']->has('defaultFormInfo'))
+            {
+                if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+                    $IParray=array_values(array_filter(explode(',',$_SERVER['HTTP_X_FORWARDED_FOR'])));
+                    $ip = $IParray[0];
+                } else {
+                    $ip = $_SERVER['REMOTE_ADDR'];
+                }
+                $userCountry = Country::getByIp($app['db'], $ip)->id;
+                $userLanguage = Language::browserLanguage($app['db']);
+
+                $app['session']->set('defaultFormInfo', [
+                    'lang' => $userLanguage,
+                    'country' => $userCountry
+                ]);
             } else {
-                $ip = $_SERVER['REMOTE_ADDR'];
+                $defaultFormInfo = $app['session']->get('defaultFormInfo');
+                $userCountry = $defaultFormInfo['country'];
+                $userLanguage = $defaultFormInfo['lang'];
             }
 
             $countries = Country::getAllWithVaccineSchedules($app['db']);
-            $userCountry = Country::getByIp($app['db'], $ip);
 
-            return $app['twig']->render('users/upload.twig', ['countries' => $countries, 'userCountry' => $userCountry, 'userLanguage' => Language::browserLanguage($app['db']), 'user' => $this->sessionUser]);
+            return $app['twig']->render('users/upload.twig', ['countries' => $countries, 'userCountry' => $userCountry, 'userLanguage' => $userLanguage, 'user' => $this->sessionUser]);
         });
 
         $controller->post('/upload', function (Request $request) use ($app) {
@@ -89,11 +104,17 @@ class UserControllerProvider implements ControllerProviderInterface
             $tempFile = $_FILES['file'];
             $defaultLang = $request->request->get('default_lang');
             $defaultCountry = $request->request->get('default_country');
+
+            $app['session']->set('defaultFormInfo', [
+               'lang' => Language::getByIdOrIso($app['db'], $defaultLang)->shortCode,
+               'country' => $defaultCountry,
+            ]);
+
             $hasHeader = isset($_POST['has_header']);
             $hasPermission = isset($_POST['has_permission']);
             $importFile = ImportFile::create($app, $this->sessionUser['id'], $tempFile, $hasHeader, $defaultLang, $defaultCountry, $hasPermission);
             $importFile->process();
-            exit;
+            return $app['twig']->render('users/uploaded.twig');
         });
 
         $controller->get('/processing', function () use ($app) {

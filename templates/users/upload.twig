@@ -113,7 +113,7 @@
                                     <label for="default_country">Default country</label>
                                     <select class="form-control" name="default_country" id="default_country">
                                     {% for country in countries %}
-                                        <option value="{{country.id|e}}" {% if(country.id == userCountry.id) %}selected="selected"{% endif %}>{{country.countryName | e}}</option>
+                                        <option value="{{country.id|e}}" {% if(country.id == userCountry) %}selected="selected"{% endif %}>{{country.countryName | e}}</option>
                                     {% endfor %}
                                     </select>
                                 </div>
