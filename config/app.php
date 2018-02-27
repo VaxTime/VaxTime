@@ -1,6 +1,7 @@
 <?php
 global $app;
 require_once __DIR__ . '/../config/config.php';
+ini_set("session.gc_maxlifetime", "86400");
 
 use Symfony\Component\HttpFoundation\Session\Storage\Handler\PdoSessionHandler;
 
