@@ -29,16 +29,16 @@ class User
 
         $this->hasAllFields = $showPassword;
 
-        $this->id = $rawData['id'];
-        $this->contactName = $rawData['contactName'];
-        $this->organisationName = $rawData['organisationName'];
-        $this->email = $rawData['email'];
-        $this->address1 = $rawData['address1'];
-        $this->address2 = $rawData['address2'];
-        $this->city = $rawData['city'];
-        $this->countryId = $rawData['countryId'];
-        $this->isAdmin = intval($rawData['isAdmin']);
-        $this->status = intval($rawData['status']);
+        $this->id = $rawData['id'] ?? '';
+        $this->contactName = $rawData['contactName'] ?? '';
+        $this->organisationName = $rawData['organisationName'] ?? '';
+        $this->email = $rawData['email'] ?? '';
+        $this->address1 = $rawData['address1'] ?? '';
+        $this->address2 = $rawData['address2'] ?? '';
+        $this->city = $rawData['city'] ?? '';
+        $this->countryId = $rawData['countryId'] ?? '';
+        $this->isAdmin = intval($rawData['isAdmin']) ?? 0;
+        $this->status = intval($rawData['status']) ?? 0;
     }
 
     public static function getById($db, $id)
