@@ -30,15 +30,18 @@ class User
         $this->hasAllFields = $showPassword;
 
         $this->id = $rawData['id'] ?? '';
-        $this->contactName = $rawData['contactName'] ?? '';
-        $this->organisationName = $rawData['organisationName'] ?? '';
+        $this->contactName = $rawData['contactName'] ?? $rawData['contact_name'] ?? '';
+        $this->organisationName = $rawData['organisationName'] ?? $rawData['organisation_name'] ?? '';
         $this->email = $rawData['email'] ?? '';
         $this->address1 = $rawData['address1'] ?? '';
         $this->address2 = $rawData['address2'] ?? '';
         $this->city = $rawData['city'] ?? '';
-        $this->countryId = $rawData['countryId'] ?? '';
-        $this->isAdmin = intval($rawData['isAdmin']) ?? 0;
-        $this->status = intval($rawData['status']) ?? 0;
+        $this->countryId = $rawData['countryId'] ?? $rawData['country_id'] ?? '';
+        $this->isAdmin = $rawData['isAdmin'] ?? $rawData['is_admin'] ?? 0;
+        $this->status = $rawData['status'] ?? 0;
+
+        $this->isAdmin = intval($this->isAdmin);
+        $this->status = intval($this->status);
     }
 
     public static function getById($db, $id)

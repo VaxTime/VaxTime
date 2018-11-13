@@ -116,12 +116,19 @@ class UserControllerProvider implements ControllerProviderInterface
             $hasPermission = isset($_POST['has_permission']);
             $importFile = ImportFile::create($app, $this->sessionUser['id'], $tempFile, $hasHeader, $defaultLang, $defaultCountry, $hasPermission);
             $importFile->process();
+
+            $user = User::getById($app['db'], $this->sessionUser['id']);
+
+            $emailProvider = new EmailProvider($app);
+            $massiveImportEmail = Email::factory($app['db'], 'massiveimport', $user, []);
+            $massiveImportEmail->addAttachment($importFile->getOutputFilePath(), 'output.csv');
+            $emailProvider->sendEmail($massiveImportEmail);
+
             return $app['twig']->render('users/uploaded.twig');
         });
 
         $controller->get('/processing', function () use ($app) {
             $app = $this->initWithLang($app);
-
         });
 
         return $controller;

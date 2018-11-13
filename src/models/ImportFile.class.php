@@ -118,7 +118,7 @@ class ImportFile
                 continue;
             }
 
-            //$this->addChildInDb();
+            $this->addChildInDb();
             $this->correctRows[$offset] = true;
         }
 
@@ -261,5 +261,9 @@ class ImportFile
             array_unshift($arrayRows, $headers);
         }
         $writer->insertAll($arrayRows);
+    }
+
+    public function getOutputFilePath() {
+        return $this->outputFilePath;
     }
 }

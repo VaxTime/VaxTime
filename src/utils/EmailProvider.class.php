@@ -39,14 +39,25 @@ class EmailProvider {
         self::$mailer->Body = $this->app['twig']->render($email->templateFile(), $email->templateVars);
         self::$mailer->setFrom($email->sender(), VAX_NAME);
         self::$mailer->addReplyTo($email->sender());
-        self::$mailer->addAddress($email->child->email, $email->child->firstname);
+        self::$mailer->addAddress($email->getAddresseeEmail(), $email->getAddresseeName());
+
+        foreach ($email->attachments as $path => $name) {
+            if (file_exists($path)) {
+                if (empty($name)) {
+                    self::$mailer->addAttachment($path);
+                } else {
+                    self::$mailer->addAttachment($path, $name);
+                }
+            }
+        }
 
         $status = self::$mailer->send();
 
-        self::$mailer->ClearAddresses();
-        self::$mailer->ClearCCs();
-        self::$mailer->ClearBCCs();
+        self::$mailer->clearAddresses();
+        self::$mailer->clearCCs();
+        self::$mailer->clearBCCs();
         self::$mailer->clearReplyTos();
+        self::$mailer->clearAttachments();
 
         return $status;
     }
