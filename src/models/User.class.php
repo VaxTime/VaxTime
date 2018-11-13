@@ -33,8 +33,8 @@ class User
         $this->contactName = $rawData['contactName'] ?? $rawData['contact_name'] ?? '';
         $this->organisationName = $rawData['organisationName'] ?? $rawData['organisation_name'] ?? '';
         $this->email = $rawData['email'] ?? '';
-        $this->address1 = $rawData['address1'] ?? '';
-        $this->address2 = $rawData['address2'] ?? '';
+        $this->address1 = $rawData['address1'] ?? $rawData['address_1'] ?? '';
+        $this->address2 = $rawData['address2'] ?? $rawData['address_2'] ?? '';
         $this->city = $rawData['city'] ?? '';
         $this->countryId = $rawData['countryId'] ?? $rawData['country_id'] ?? '';
         $this->isAdmin = $rawData['isAdmin'] ?? $rawData['is_admin'] ?? 0;
