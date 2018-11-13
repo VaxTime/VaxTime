@@ -33,6 +33,8 @@ class UserControllerProvider implements ControllerProviderInterface
             $app = $this->initWithLang($app);
             if (!$this->isLoggedIn($app)) {
                 return $app->redirect('/user/login');
+            } else {
+                return $app->redirect('/user/upload');
             }
             return $app['twig']->render('users/index.twig', []);
         });
