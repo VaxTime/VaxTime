@@ -30,6 +30,8 @@ $app->get('/unsubscribe/{child_id}/{hash}', function (Request $request, $child_i
     return $app->redirect($app['url_generator']->generate("unsubscribe_{$languagePrefix}", ['child_id' => $child_id, 'hash' => $hash]));
 });
 
+$app->mount('/user', new UserControllerProvider());
+
 foreach ($languages as $language) {
     $shortCode = $language->shortCode;
     $app->mount('/' . $shortCode, new VaxTimeControllerProvider($shortCode));

@@ -10,6 +10,8 @@ define('VAX_SRC', realpath(VAX_ROOT_PATH . '/src'));
 define('VAX_CONFIG', realpath(VAX_ROOT_PATH . '/config'));
 define('VAX_TEMPLATES', realpath(VAX_ROOT_PATH . '/templates'));
 define('VAX_PUBLIC', realpath(VAX_ROOT_PATH . '/public'));
+define('VAX_UPLOADED_FILES', realpath(VAX_ROOT_PATH . '/../uploads'));
+define('VAX_UPLOADED_CSV', realpath(VAX_UPLOADED_FILES . '/csv'));
 
 define('VAX_ANALYTICS_KEY', '');
 

@@ -53,6 +53,8 @@
 <br>
 {% if vaccination.entireCountry == 0 %}<p>{{tx('vax_recommended_only', {'<COUNTRY_NAME&&>': country.countryName|e})}}</p>{% endif %}
 
+{% if unsubLink|length %}
 <p style="font-size: 11px; float:left">{{tx('share_others_signup')}} {{tx('unsub_text', {'<UNSUB_LINK_START&&>': linkOpen(unsubLink, '_blank'), '<UNSUB_LINK_END&&>': linkClose()})|raw}}</p>
+{% endif %}
 	</body>
 </html>

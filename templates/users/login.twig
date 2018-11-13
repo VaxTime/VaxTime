@@ -1,0 +1,25 @@
+{% extends "site/layout.general.twig" %}
+{% block title %}{{ constant('VAX_NAME') }} - Log in{% endblock %}
+{% block content %}
+    <div id="content" class="main">
+        {% if(showError) %}
+        <div class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+            The email/password combination doesn't exist.
+        </div>
+        {% endif %}
+
+        <form method="post">
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <label for="pwd">Password</label>
+                <input type="password" class="form-control" id="pwd" name="pwd" placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-default">Log in</button>
+        </form>
+    </div>
+{% endblock %}

@@ -4,29 +4,44 @@ abstract class Email {
 
     const TYPES = [
         'welcome' => 'WelcomeEmail',
-        'reminder' => 'ReminderEmail'
-    ]; 
+        'reminder' => 'ReminderEmail',
+        'massiveimport' => 'MassiveImportEmail'
+    ];
 
     protected $db;
     public $child;
+    public $user;
     public $extraData;
     public $templateVars = [];
+    public $attachments = [];
 
-    public function __construct($db, $child, $extraData) {
+    public function __construct($db, $childOrUser = null, $extraData = []) {
         $this->db = $db;
-        $this->child = $child;
+        if (!empty($childOrUser)) {
+            if (get_class($childOrUser) == "User") {
+                $this->user = $childOrUser;
+            } elseif (get_class($childOrUser) == "Child") {
+                $this->child = $childOrUser;
+            }
+        }
         $this->extraData = $extraData;
     }
 
-    public abstract function templateFile();
-    public abstract function subject();
-    public abstract function sender();
-    public abstract function populateForUser();
+    abstract public function templateFile();
+    abstract public function subject();
+    abstract public function sender();
+    abstract public function populateForUser();
 
     public function prepare() {
-        $this->templateVars['unsubLink'] = VAX_HOME_URL . '/unsubscribe/' . $this->child->childId . '/' . self::userHash($this->child);
-        $this->templateVars['child'] = $this->child;
+        if (!empty($this->child)) {
+            $this->templateVars['unsubLink'] = VAX_HOME_URL . '/unsubscribe/' . $this->child->childId . '/' . self::userHash($this->child);
+            $this->templateVars['child'] = $this->child;
+        }
         $this->populateForUser();
+    }
+
+    public function addAttachment($path, $name = '') {
+        $this->attachments[$path] = $name;
     }
 
     public static function userHash($child) {
@@ -47,5 +62,13 @@ abstract class Email {
                 return $emailItem;
             }
         }
+    }
+
+    public function getAddresseeEmail() {
+        return !empty($this->child) ? $this->child->email : $this->user->email;
+    }
+
+    public function getAddresseeName() {
+        return !empty($this->child) ? $this->child->firstname : $this->user->contactName;
     }
 }

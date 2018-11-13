@@ -34,6 +34,15 @@ class Language {
         return self::createLanguagesArray($db->fetchAll("SELECT * FROM " . VAX_DB_PREFIX . "languages WHERE short_code = '{$code}' LIMIT 1"))[0];
     }
 
+    public static function getByIdOrIso($db, $idOrIso) {
+        $lang = $db->fetchAssoc("SELECT * FROM " . VAX_DB_PREFIX . "languages WHERE lang_id = ? OR short_code = ?", [$idOrIso, $idOrIso]);
+        if (!empty($lang)) {
+            return new Language($lang);
+        } else {
+            return false;
+        }
+    }
+
     public static function browserLanguage($db) {
         if (empty(self::$allLanguages)) {
             self::getAll($db);

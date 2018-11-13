@@ -20,6 +20,8 @@
           'tableHeaderStyles': 'letter-spacing:.1em;text-transform:uppercase',
           'schedules': vaccineSchedules} %}
         
+        {% if unsubLink|length %}
         <p style="font-size: 11px;float: left">{{tx('unsub_text', {'<UNSUB_LINK_START&&>': linkOpen(unsubLink, '_blank'), '<UNSUB_LINK_END&&>': linkClose()})|raw}}</p>
+        {% endif %}
     </body>
 </html>

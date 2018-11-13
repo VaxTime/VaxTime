@@ -10,14 +10,15 @@ class Child {
     public $zipcode;
     public $birthday;
     public $langId;
+    public $userId;
 
     private $db;
 
     public static function createDummy($birthday, $gender, $langId, $countryId, $zipcode = null) {
-        return new Child(null, null, null, $birthday, $gender, $langId, $countryId, $zipcode, false, null);
+        return new Child(null, null, null, $birthday, $gender, $langId, $countryId, $zipcode, false, null, null);
     }
 
-    public function __construct($db, $email, $firstname, $birthday, $gender, $langId, $countryId, $zipcode = null, $doInsert = true, $childId = null) {
+    public function __construct($db, $email, $firstname, $birthday, $gender, $langId, $countryId, $zipcode = null, $doInsert = true, $childId = null, $userId = null) {
         if ($doInsert) {
             $isOk = $db->insert(VAX_DB_PREFIX . "children", [
                 'email' => $email,
@@ -26,7 +27,8 @@ class Child {
                 'country_id' => $countryId,
                 'zipcode' => $zipcode,
                 'birthday' => $birthday,
-                'lang_id' => $langId
+                'lang_id' => $langId,
+                'user_id' => $userId
             ]);
 
             if ($isOk) {
@@ -38,6 +40,7 @@ class Child {
                 $this->zipcode = $zipcode;
                 $this->birthday = $birthday;
                 $this->langId = $langId;
+                $this->userId = $userId;
                 $this->db = $db;
                 return $this;
             }
@@ -50,6 +53,7 @@ class Child {
             $this->zipcode = $zipcode;
             $this->birthday = $birthday;
             $this->langId = $langId;
+            $this->userId = $userId;
             $this->db = $db;
             return $this;
         }
